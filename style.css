@@ -1079,6 +1079,25 @@ footer small {
     }
 
     @media (max-width: 550px) {
+       .hero {
+    padding-top: 70px;
+}
+       .hero-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+    flex-wrap: nowrap;
+}
+
+.hero-buttons a {
+    flex: 1;
+    min-width: 0;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 14px 8px;
+    font-size: 10px;
+}
     .logo {
         width: 44px;
         height: 44px;
