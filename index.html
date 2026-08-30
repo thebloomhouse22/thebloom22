@@ -1,1573 +1,922 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>The Bloom House</title>
 
   <meta
     name="description"
-    content="The Bloom House — Creative • Social • Production"
+    content="The Bloom House — Creative, Social & Production"
   >
 
-  <style>
-
-    /* =====================================================
-       THE BLOOM HOUSE
-       GLOBAL
-       ===================================================== */
-
-    :root {
-
-      --bg: #09040f;
-      --bg2: #11071b;
-
-      --purple: #7c3aed;
-      --violet: #a855f7;
-      --lavender: #d8b4fe;
-
-      --white: #ffffff;
-      --muted: #aaa1b5;
-
-      --line: rgba(216,180,254,0.15);
-
-      --max-width: 1240px;
-
-    }
-
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-
-    body {
-
-      background:
-        linear-gradient(
-          180deg,
-          #09040f,
-          #0d0615,
-          #09040f
-        );
-
-      color: var(--white);
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-      overflow-x: hidden;
-
-    }
-
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-
-    .container {
-
-      width: min(
-        90%,
-        var(--max-width)
-      );
-
-      margin: auto;
-
-    }
-
-
-    section {
-
-      position: relative;
-
-      padding:
-        130px 0;
-
-    }
-
-
-    /* =====================================================
-       PURPLE BLOOM BACKGROUND
-       ===================================================== */
-
-    .bloom-background {
-
-      position: fixed;
-
-      inset: 0;
-
-      z-index: -10;
-
-      pointer-events: none;
-
-      overflow: hidden;
-
-      background:
-
-        radial-gradient(
-          circle at 50% 15%,
-          rgba(124,58,237,0.18),
-          transparent 30%
-        ),
-
-        radial-gradient(
-          circle at 10% 60%,
-          rgba(168,85,247,0.08),
-          transparent 25%
-        ),
-
-        #09040f;
-
-    }
-
-
-    .bloom {
-
-      position: absolute;
-
-      width: 450px;
-      height: 450px;
-
-      left: 50%;
-      top: 20%;
-
-      transform:
-        translate(-50%,-50%);
-
-      border-radius: 50%;
-
-      background:
-
-        radial-gradient(
-          circle,
-          rgba(168,85,247,0.55),
-          rgba(124,58,237,0.16) 45%,
-          transparent 72%
-        );
-
-      filter: blur(35px);
-
-      animation:
-        bloomPulse 8s ease-in-out infinite;
-
-    }
-
-
-    .bloom::before {
-
-      content: "";
-
-      position: absolute;
-
-      inset: 10%;
-
-      border-radius: 50%;
-
-      background:
-
-        radial-gradient(
-          ellipse,
-          rgba(216,180,254,0.18),
-          transparent 70%
-        );
-
-      transform:
-        rotate(45deg);
-
-    }
-
-
-    .orb {
-
-      position: absolute;
-
-      border-radius: 50%;
-
-      filter: blur(2px);
-
-      opacity: 0.25;
-
-    }
-
-
-    .orb.one {
-
-      width: 180px;
-      height: 180px;
-
-      left: 5%;
-      top: 35%;
-
-      background: var(--purple);
-
-      animation:
-        floatOne 12s ease-in-out infinite;
-
-    }
-
-
-    .orb.two {
-
-      width: 240px;
-      height: 240px;
-
-      right: 2%;
-      top: 55%;
-
-      background: var(--violet);
-
-      animation:
-        floatTwo 14s ease-in-out infinite;
-
-    }
-
-
-    @keyframes bloomPulse {
-
-      0%,100% {
-
-        transform:
-          translate(-50%,-50%)
-          scale(0.85);
-
-        opacity: 0.35;
-
-      }
-
-      50% {
-
-        transform:
-          translate(-50%,-50%)
-          scale(1.25);
-
-        opacity: 0.65;
-
-      }
-
-    }
-
-
-    @keyframes floatOne {
-
-      0%,100% {
-        transform: translate(0,0);
-      }
-
-      50% {
-        transform: translate(70px,-60px);
-      }
-
-    }
-
-
-    @keyframes floatTwo {
-
-      0%,100% {
-        transform: translate(0,0);
-      }
-
-      50% {
-        transform: translate(-80px,70px);
-      }
-
-    }
-
-
-    /* =====================================================
-       NAVBAR
-       ===================================================== */
-
-    .nav {
-
-      position: fixed;
-
-      top: 0;
-      left: 0;
-
-      width: 100%;
-
-      z-index: 100;
-
-      padding: 20px 5%;
-
-      transition: 0.35s ease;
-
-    }
-
-
-    .nav.scrolled {
-
-      padding: 13px 5%;
-
-      background:
-        rgba(9,4,15,0.72);
-
-      backdrop-filter:
-        blur(18px);
-
-      border-bottom:
-        1px solid var(--line);
-
-    }
-
-
-    .nav-inner {
-
-      max-width:
-        var(--max-width);
-
-      margin: auto;
-
-      display: flex;
-
-      justify-content:
-        space-between;
-
-      align-items: center;
-
-    }
-
-
-    .logo {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 11px;
-
-      font-size: 13px;
-
-      font-weight: 800;
-
-      letter-spacing: 0.15em;
-
-    }
-
-
-    /*
-       Replace this with your real logo if needed.
-    */
-
-    .logo-mark {
-
-      width: 35px;
-      height: 35px;
-
-      border-radius: 50%;
-
-      background:
-
-        radial-gradient(
-          circle,
-          #ead7ff 0 8%,
-          transparent 9%
-        ),
-
-        conic-gradient(
-          #7c3aed,
-          #c084fc,
-          #6d28d9,
-          #a855f7,
-          #7c3aed
-        );
-
-      box-shadow:
-        0 0 30px
-        rgba(168,85,247,0.5);
-
-    }
-
-
-    .nav-links {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 30px;
-
-      font-size: 12px;
-
-      color: var(--muted);
-
-    }
-
-
-    .nav-links a {
-
-      transition: 0.25s ease;
-
-    }
-
-
-    .nav-links a:hover {
-
-      color: white;
-
-    }
-
-
-    .nav-cta {
-
-      border:
-        1px solid
-        rgba(216,180,254,0.3);
-
-      padding:
-        10px 17px;
-
-      border-radius: 100px;
-
-      color: white !important;
-
-    }
-
-
-    /* =====================================================
-       TYPOGRAPHY
-       ===================================================== */
-
-    .eyebrow {
-
-      margin-bottom: 22px;
-
-      color:
-        var(--lavender);
-
-      font-size: 10px;
-
-      font-weight: 700;
-
-      letter-spacing: 0.2em;
-
-      text-transform:
-        uppercase;
-
-    }
-
-
-    .section-title {
-
-      font-size:
-        clamp(
-          45px,
-          7vw,
-          95px
-        );
-
-      line-height:
-        0.92;
-
-      letter-spacing:
-        -0.06em;
-
-      max-width:
-        950px;
-
-    }
-
-
-    .purple-text {
-
-      color:
-        var(--lavender);
-
-    }
-
-
-    .section-description {
-
-      margin-top: 28px;
-
-      max-width: 600px;
-
-      color:
-        var(--muted);
-
-      font-size: 15px;
-
-      line-height: 1.8;
-
-    }
-
-
-    /* =====================================================
-       HERO
-       ===================================================== */
-
-    .hero {
-
-      min-height:
-        100vh;
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      padding-top:
-        130px;
-
-    }
-
-
-    .hero-title {
-
-      font-size:
-        clamp(
-          65px,
-          12vw,
-          165px
-        );
-
-      line-height:
-        0.82;
-
-      letter-spacing:
-        -0.075em;
-
-      font-weight:
-        900;
-
-    }
-
-
-    .hero-title span {
-
-      display:
-        block;
-
-    }
-
-
-    .outline {
-
-      color:
-        transparent;
-
-      -webkit-text-stroke:
-        1px rgba(255,255,255,0.65);
-
-    }
-
-
-    .hero-bottom {
-
-      margin-top:
-        55px;
-
-      display:
-        flex;
-
-      justify-content:
-        space-between;
-
-      align-items:
-        flex-end;
-
-      gap: 40px;
-
-    }
-
-
-    .hero-description {
-
-      max-width:
-        470px;
-
-      color:
-        var(--muted);
-
-      line-height:
-        1.8;
-
-    }
-
-
-    .hero-buttons {
-
-      display:
-        flex;
-
-      gap: 12px;
-
-      flex-wrap:
-        wrap;
-
-    }
-
-
-    .btn {
-
-      display:
-        inline-flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      padding:
-        15px 22px;
-
-      border-radius:
-        100px;
-
-      border:
-        1px solid
-        var(--line);
-
-      font-size:
-        12px;
-
-      font-weight:
-        700;
-
-      transition:
-        0.3s ease;
-
-    }    </header>
-
-
-    <!-- ==============================
-         MAIN
-    ============================== -->
-
-    <main>
-
-
-        <!-- ==============================
-             HERO
-        ============================== -->
-
-        <section class="hero">
-
-            <div class="hero-content">
-
-                <div class="eyebrow">
-
-                    <span class="dot"></span>
-
-                    SOCIAL MEDIA, BUT MAKE IT ICONIC
-
-                </div>
-
-
-                <h1>
-
-                    <span class="hero-line">
-                        We Make Brands
-                    </span>
-
-                    <span class="hero-line bloom-text">
-                      BLOOM.
-                    </span>
-
-                </h1>
-
-
-                <p>
-
-                    Strategic social media management for brands that
-                    want to look good, feel premium, and actually grow.
-
-                </p>
-
-
-                <!-- THREE BUTTONS -->
-
-                <div class="hero-buttons">
-
-
-                    <!-- 01 PURPLE -->
-
-                    <a
-                        href="https://wa.me/916371225580?text=Hi%20The%20Bloom%20House!%20I%27d%20like%20to%20know%20more%20about%20your%20services."
-                        class="hero-button whatsapp-button"
-                        target="_blank"
-                    >
-
-                        <span>Let's Bloom</span>
-                        <span>↗</span>
-
-                    </a>
-
-
-                    <!-- 02 IVORY -->
-
-                    <a
-                        href="#plans"
-                        class="hero-button plans-button"
-                    >
-
-                        <span>Explore Plans</span>
-                        <span>↗</span>
-
-                    </a>
-
-
-                    <!-- 03 GLASS -->
-
-                    <a
-                        href="#services"
-                        class="hero-button services-button"
-                    >
-
-                        <span>What we do</span>
-
-                    </a>
-
-                </div>
-
-
-                <!-- HERO STATS -->
-
-                <div class="hero-stats">
-
-                    <div>
-                        <strong>01</strong>
-                        <span>Strategy</span>
-                    </div>
-
-                    <div>
-                        <strong>02</strong>
-                        <span>Content</span>
-                    </div>
-
-                    <div>
-                        <strong>03</strong>
-                        <span>Growth</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- ==============================
-                 HERO VISUAL
-            ============================== -->
-
-            <div class="hero-visual">
-
-                <div class="floating-card card-top">
-
-                    <span>✦</span>
-
-                    <div>
-                        <strong>Content</strong>
-                        <small>that stops the scroll.</small>
-                    </div>
-
-                </div>
-
-
-                <div class="hero-circle">
-
-                    <div class="circle-inner">
-
-                        <span>TBH</span>
-
-                        <p>
-                            Social<br>
-                            Studio
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="floating-card card-bottom">
-
-                    <span>↗</span>
-
-                    <div>
-                        <strong>Grow</strong>
-                        <small>with intention.</small>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ==============================
-             MARQUEE
-        ============================== -->
-
-        <section class="marquee-section">
-
-            <div class="marquee">
-
-                <span>STRATEGY</span>
-                <i>✦</i>
-
-                <span>CONTENT</span>
-                <i>✦</i>
-
-                <span>CREATIVE</span>
-                <i>✦</i>
-
-                <span>COMMUNITY</span>
-                <i>✦</i>
-
-                <span>GROWTH</span>
-                <i>✦</i>
-
-                <span>STRATEGY</span>
-                <i>✦</i>
-
-                <span>CONTENT</span>
-                <i>✦</i>
-
-            </div>
-
-        </section>
-
-
-        <!-- ==============================
-             ABOUT
-        ============================== -->
-
-        <section
-            class="about section"
-            id="about"
-        >
-
-            <div class="section-label">
-                01 / THE HOUSE
-            </div>
-
-
-            <div class="about-grid">
-
-                <div>
-
-                    <h2>
-
-                        More than posts.
-
-                        <em>
-                            It's your digital presence.
-                        </em>
-
-                    </h2>
-
-                </div>
-
-
-                <div class="about-text">
-
-                    <p>
-                        The Bloom House is a social media management studio
-                        built for brands that don't want to blend in.
-                    </p>
-
-                    <p>
-                        We combine strategy, storytelling, design and
-                        data to turn your social platforms into a place
-                        your audience actually wants to be.
-                    </p>
-
-                    <a
-                        href="#contact"
-                        class="text-link"
-                    >
-                        Meet your new social team →
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ==============================
-             SERVICES
-        ============================== -->
-
-        <section
-            class="services section"
-            id="services"
-        >
-
-            <div class="section-heading">
-
-                <div class="section-label">
-                    02 / WHAT WE DO
-                </div>
-
-                <h2>
-                    Your socials,
-                    <span>sorted.</span>
-                </h2>
-
-            </div>
-
-
-            <div class="service-grid">
-
-
-                <article class="service-card">
-
-                    <span class="service-number">
-                        01
-                    </span>
-
-                    <div class="service-icon">
-                        ✦
-                    </div>
-
-                    <h3>
-                        Social Strategy
-                    </h3>
-
-                    <p>
-                        We create a clear social roadmap designed around
-                        your brand, audience and goals.
-                    </p>
-
-                    <a href="#contact">
-                        Explore →
-                    </a>
-
-                </article>
-
-
-                <article class="service-card featured">
-
-                    <span class="service-number">
-                        02
-                    </span>
-
-                    <div class="service-icon">
-                        ◌
-                    </div>
-
-                    <h3>
-                        Content Creation
-                    </h3>
-
-                    <p>
-                        Scroll-stopping visuals, captions and creative
-                        concepts that make your brand memorable.
-                    </p>
-
-                    <a href="#contact">
-                        Explore →
-                    </a>
-
-                </article>
-
-
-                <article class="service-card">
-
-                    <span class="service-number">
-                        03
-                    </span>
-
-                    <div class="service-icon">
-                        ↗
-                    </div>
-
-                    <h3>
-                        Community & Growth
-                    </h3>
-
-                    <p>
-                        Build a real community through engagement,
-                        analytics and thoughtful growth strategies.
-                    </p>
-
-                    <a href="#contact">
-                        Explore →
-                    </a>
-
-                </article>
-
-
-            </div>
-
-        </section>
-
-
-        <!-- ==============================
-             PLANS
-        ============================== -->
-
-        <section
-            class="plans section"
-            id="plans"
-        >
-
-            <div class="section-heading plans-heading">
-
-                <div class="section-label">
-                    03 / THE PLANS
-                </div>
-
-                <h2>
-                    Pick your
-                    <span>bloom.</span>
-                </h2>
-
-                <p>
-                    Four ways to make your social presence feel
-                    a little more ✨ you ✨.
-                </p>
-
-            </div>
-
-
-            <div class="plans-grid">
-
-
-                <!-- PLAN 1 -->
-
-                <article class="plan-card">
-
-                    <div class="plan-top">
-                        <span>01</span>
-                        <span>Starter</span>
-                    </div>
-
-                    <h3>
-                        The Seed
-                    </h3>
-
-                    <p class="plan-description">
-                        For brands ready to finally get serious
-                        about showing up online.
-                    </p>
-
-                    <div class="price">
-
-                        <small>
-                            Starting at
-                        </small>
-
-                        <strong>
-                            ₹XX,XXX
-                        </strong>
-
-                        <span>
-                            / month
-                        </span>
-
-                    </div>
-
-                    <ul>
-
-                        <li>✓ Social media strategy</li>
-                        <li>✓ Monthly content calendar</li>
-                        <li>✓ X posts per month</li>
-                        <li>✓ Caption writing</li>
-                        <li>✓ Monthly analytics</li>
-
-                    </ul>
-
-                    <a
-                        href="#contact"
-                        class="plan-button"
-                    >
-                        Choose The Seed →
-                    </a>
-
-                </article>
-
-
-                <!-- PLAN 2 -->
-
-                <article class="plan-card popular">
-
-                    <div class="popular-badge">
-                        MOST POPULAR
-                    </div>
-
-                    <div class="plan-top">
-                        <span>02</span>
-                        <span>Growth</span>
-                    </div>
-
-                    <h3>
-                        The Bloom
-                    </h3>
-
-                    <p class="plan-description">
-                        The sweet spot for brands ready to become
-                        impossible to ignore.
-                    </p>
-
-                    <div class="price">
-
-                        <small>
-                            Starting at
-                        </small>
-
-                        <strong>
-                            ₹XX,XXX
-                        </strong>
-
-                        <span>
-                            / month
-                        </span>
-
-                    </div>
-
-                    <ul>
-
-                        <li>✓ Everything in The Seed</li>
-                        <li>✓ More monthly content</li>
-                        <li>✓ Reels & short-form video</li>
-                        <li>✓ Community management</li>
-                        <li>✓ Monthly strategy call</li>
-
-                    </ul>
-
-                    <a
-                        href="#contact"
-                        class="plan-button"
-                    >
-                        Choose The Bloom →
-                    </a>
-
-                </article>
-
-
-                <!-- PLAN 3 -->
-
-                <article class="plan-card">
-
-                    <div class="plan-top">
-                        <span>03</span>
-                        <span>Premium</span>
-                    </div>
-
-                    <h3>
-                        The Garden
-                    </h3>
-
-                    <p class="plan-description">
-                        A full-service social experience for brands
-                        ready to grow beautifully.
-                    </p>
-
-                    <div class="price">
-
-                        <small>
-                            Starting at
-                        </small>
-
-                        <strong>
-                            ₹XX,XXX
-                        </strong>
-
-                        <span>
-                            / month
-                        </span>
-
-                    </div>
-
-                    <ul>
-
-                        <li>✓ Everything in The Bloom</li>
-                        <li>✓ Premium content production</li>
-                        <li>✓ Influencer strategy</li>
-                        <li>✓ Advanced analytics</li>
-                        <li>✓ Bi-weekly strategy calls</li>
-
-                    </ul>
-
-                    <a
-                        href="#contact"
-                        class="plan-button"
-                    >
-                        Choose The Garden →
-                    </a>
-
-                </article>
-
-
-                <!-- PLAN 4 -->
-
-                <article class="plan-card">
-
-                    <div class="plan-top">
-                        <span>04</span>
-                        <span>Elite</span>
-                    </div>
-
-                    <h3>
-                        The Wildflower
-                    </h3>
-
-                    <p class="plan-description">
-                        Your outsourced social media department,
-                        built around your brand.
-                    </p>
-
-                    <div class="price">
-
-                        <small>
-                            Starting at
-                        </small>
-
-                        <strong>
-                            ₹XX,XXX
-                        </strong>
-
-                        <span>
-                            / month
-                        </span>
-
-                    </div>
-
-                    <ul>
-
-                        <li>✓ Everything in The Garden</li>
-                        <li>✓ Fully bespoke strategy</li>
-                        <li>✓ High-volume content</li>
-                        <li>✓ Campaign management</li>
-                        <li>✓ Priority creative support</li>
-
-                    </ul>
-
-                    <a
-                        href="#contact"
-                        class="plan-button"
-                    >
-                        Choose The Wildflower →
-                    </a>
-
-                </article>
-
-
-            </div>
-
-        </section>
-
-
-        <!-- ==============================
-             CTA
-        ============================== -->
-
-        <section
-            class="cta section"
-            id="contact"
-        >
-
-            <div class="cta-mandala"></div>
-
-            <div class="cta-content">
-
-                <div class="section-label">
-                    04 / LET'S TALK
-                </div>
-
-                <h2>
-
-                    Ready to make
-
-                    <em>
-                        some noise?
-                    </em>
-
-                </h2>
-
-                <p>
-                    Your next chapter deserves better socials.
-                    Let's create something people remember.
-                </p>
-
-                <a
-                    href="https://wa.me/916371225580?text=Hi%20The%20Bloom%20House!%20I%27d%20like%20to%20know%20more%20about%20your%20services."
-                    class="primary-button"
-                    target="_blank"
-                >
-                    Start a conversation ↗
-                </a>
-
-            </div>
-
-        </section>
-
-    </main>
-    <!-- =====================================================
-     CORE TEAM
-     ====================================================== -->
-
-<section id="team" class="team-section">
-
-  <div class="container">
-
-    <div class="team-heading reveal">
-
-      <div class="eyebrow">
-        05 / The Core Team
-      </div>
-
-      <h2 class="section-title">
-        THE PEOPLE
-        <span class="purple-text">
-          BEHIND THE BLOOM.
-        </span>
-      </h2>
-
-      <p class="section-description">
-        Four minds. One creative vision.
-        Different strengths coming together to build
-        brands that deserve to be noticed.
-      </p>
-
-    </div>
-
-
-    <div class="team-grid">
-
-
-      <!-- TEAM MEMBER 01 -->
-
-      <article class="team-card reveal">
-
-        <div class="team-photo">
-
-          <img
-            src="images/team-01.jpg"
-            alt="Sampurna — Creative Director"
-            loading="lazy"
-          />
-
-          <div class="team-photo-overlay"></div>
-
-          <span class="team-index">
-            01
-          </span>
-
-        </div>
-
-        <div class="team-info">
-
-          <h3>
-            SAMPURNA
-          </h3>
-
-          <p class="team-role">
-            Creative Director
-          </p>
-
-          <p class="team-speciality">
-            Creative Strategy • Creative Direction • Brand Vision
-          </p>
-
-        </div>
-
-      </article>
-
-
-      <!-- TEAM MEMBER 02 -->
-
-      <article class="team-card reveal">
-
-        <div class="team-photo">
-
-          <img
-            src="images/team-02.jpg"
-            alt="Ashutosh — Content and Production"
-            loading="lazy"
-          />
-
-          <div class="team-photo-overlay"></div>
-
-          <span class="team-index">
-            02
-          </span>
-
-        </div>
-
-        <div class="team-info">
-
-          <h3>
-            ASHUTOSH
-          </h3>
-
-          <p class="team-role">
-            Content &amp; Production
-          </p>
-
-          <p class="team-speciality">
-            Videography • Photography • Production
-          </p>
-
-        </div>
-
-      </article>
-
-
-      <!-- TEAM MEMBER 03 -->
-
-      <article class="team-card reveal">
-
-        <div class="team-photo">
-
-          <img
-            src="images/team-03.jpg"
-            alt="Bibhu Bag — Social and Marketing"
-            loading="lazy"
-          />
-
-          <div class="team-photo-overlay"></div>
-
-          <span class="team-index">
-            03
-          </span>
-
-        </div>
-
-        <div class="team-info">
-
-          <h3>
-            BIBHU BAG
-          </h3>
-
-          <p class="team-role">
-            Social &amp; Marketing
-          </p>
-
-          <p class="team-speciality">
-            Social Media • Content Strategy • Campaigns
-          </p>
-
-        </div>
-
-      </article>
-
-
-      <!-- TEAM MEMBER 04 -->
-
-      <article class="team-card reveal">
-
-        <div class="team-photo">
-
-          <img
-            src="images/team-04.jpg"
-            alt="Annik — Design and Creative"
-            loading="lazy"
-          />
-
-          <div class="team-photo-overlay"></div>
-
-          <span class="team-index">
-            04
-          </span>
-
-        </div>
-
-        <div class="team-info">
-
-          <h3>
-            ANNIK
-          </h3>
-
-          <p class="team-role">
-            Design &amp; Creative
-          </p>
-
-          <p class="team-speciality">
-            Visual Design • Campaign Creatives • Brand Visuals
-          </p>
-
-        </div>
-
-      </article>
-
-
-    </div>
-
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- BACKGROUND -->
+  <div class="bloom-background">
+    <div class="bloom"></div>
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
   </div>
 
-</section>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+
+    <div class="nav-inner">
+
+      <a href="#home" class="logo">
+        <div class="logo-mark"></div>
+        <span>THE BLOOM HOUSE</span>
+      </a>
+
+      <nav class="nav-links">
+
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#team">Team</a>
+        <a href="#approach">Approach</a>
+
+        <a href="#contact" class="nav-cta">
+          Let's Talk
+        </a>
+
+      </nav>
+
+    </div>
+
+  </header>
 
 
-    <!-- ==============================
-         FOOTER
-    ============================== -->
+  <main>
 
-    <footer>
 
-        <div class="footer-logo">
+    <!-- HERO -->
+    <section class="hero" id="home">
 
-            <img
-                src="logo.jpg"
-                alt="The Bloom House Logo"
-                class="footer-logo-image"
+      <div class="container reveal">
+
+        <div class="eyebrow">
+          CREATIVE • SOCIAL • PRODUCTION
+        </div>
+
+        <h1 class="hero-title">
+          <span>WE MAKE</span>
+
+          <span class="purple">
+            BRANDS
+          </span>
+
+          <span class="outline">
+            BLOOM.
+          </span>
+        </h1>
+
+
+        <div class="hero-bottom">
+
+          <p class="hero-description">
+
+            We turn ideas, products and people
+            into visual stories that connect with
+            audiences and make brands worth noticing.
+
+          </p>
+
+
+          <div class="buttons">
+
+            <a
+              href="#work"
+              class="btn btn-primary"
             >
+              Explore Our Work →
+            </a>
+
+            <a
+              href="#contact"
+              class="btn btn-secondary"
+            >
+              Start a Project
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="scroll-indicator">
+        SCROLL TO EXPLORE ↓
+      </div>
+
+    </section>
+
+
+
+    <!-- ABOUT -->
+    <section id="about">
+
+      <div class="container about-grid">
+
+        <div class="reveal">
+
+          <div class="eyebrow">
+            01 / WHO WE ARE
+          </div>
+
+          <h2 class="about-title">
+
+            IDEAS ARE
+            <span class="purple">
+              SEEDS.
+            </span>
+
+            WE HELP THEM
+            <span class="purple">
+              GROW.
+            </span>
+
+          </h2>
 
         </div>
 
 
+        <div class="about-text reveal">
+
+          <p>
+
+            <strong>The Bloom House</strong>
+            is a creative studio focused on
+            strategy, visual storytelling and
+            social-first content.
+
+          </p>
+
+          <br>
+
+          <p>
+
+            From concept to camera, from edit
+            to social — we bring creative
+            thinking and production together
+            to build content people actually
+            want to see.
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- SERVICES -->
+    <section id="services">
+
+      <div class="container">
+
+        <div class="reveal">
+
+          <div class="eyebrow">
+            02 / WHAT WE DO
+          </div>
+
+          <h2 class="section-title">
+
+            WE CREATE
+            <span class="purple">
+              WITH PURPOSE.
+            </span>
+
+          </h2>
+
+          <p class="section-description">
+
+            From strategy and production to
+            social media and visual design,
+            we create content around what
+            your brand actually needs.
+
+          </p>
+
+        </div>
+
+
+        <div class="services-grid">
+
+
+          <article class="service-card reveal">
+
+            <span class="service-number">
+              01 / STRATEGY
+            </span>
+
+            <h3>
+              Strategy
+            </h3>
+
+            <p>
+              Creative Direction<br>
+              Content Planning<br>
+              Campaign Concepts
+            </p>
+
+          </article>
+
+
+          <article class="service-card reveal">
+
+            <span class="service-number">
+              02 / CONTENT
+            </span>
+
+            <h3>
+              Content
+            </h3>
+
+            <p>
+              Photography<br>
+              Videography<br>
+              Reels
+            </p>
+
+          </article>
+
+
+          <article class="service-card reveal">
+
+            <span class="service-number">
+              03 / SOCIAL
+            </span>
+
+            <h3>
+              Social
+            </h3>
+
+            <p>
+              Social Media Management<br>
+              Social Content<br>
+              Content Strategy
+            </p>
+
+          </article>
+
+
+          <article class="service-card reveal">
+
+            <span class="service-number">
+              04 / DESIGN
+            </span>
+
+            <h3>
+              Design
+            </h3>
+
+            <p>
+              Social Creatives<br>
+              Campaign Design<br>
+              Brand Visuals
+            </p>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- WORK -->
+    <section id="work">
+
+      <div class="container">
+
+        <div class="reveal">
+
+          <div class="eyebrow">
+            03 / SELECTED WORK
+          </div>
+
+          <h2 class="section-title">
+
+            WE CREATE.
+            <span class="purple">
+              YOU GET NOTICED.
+            </span>
+
+          </h2>
+
+        </div>
+
+
+        <div class="work-grid">
+
+
+          <article class="work-card reveal">
+
+            <img
+              src="ishana-01.jpg"
+              alt="Ishana Makeovers"
+            >
+
+            <div class="work-overlay">
+
+              <span>
+                BEAUTY • SOCIAL • CONTENT
+              </span>
+
+              <h3>
+                Ishana Makeovers
+              </h3>
+
+            </div>
+
+          </article>
+
+
+          <div class="work-side">
+
+            <article class="work-card small reveal">
+
+              <img
+                src="ishana-reel.jpg"
+                alt="Ishana Reel"
+              >
+
+              <div class="work-overlay">
+
+                <span>REELS</span>
+
+                <h3>
+                  Short-form Stories
+                </h3>
+
+              </div>
+
+            </article>
+
+
+            <article class="work-card small reveal">
+
+              <img
+                src="ishana-creative.jpg"
+                alt="Ishana Creative"
+              >
+
+              <div class="work-overlay">
+
+                <span>CREATIVE</span>
+
+                <h3>
+                  Social Campaigns
+                </h3>
+
+              </div>
+
+            </article>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- CASE STUDY -->
+    <section id="case-study" class="case-study">
+
+      <div class="container">
+
+        <div class="case-header reveal">
+
+          <div>
+
+            <div class="eyebrow">
+              04 / CASE STUDY
+            </div>
+
+            <h2 class="case-title">
+
+              ISHANA
+              <span class="purple">
+                MAKEOVERS
+              </span>
+
+            </h2>
+
+          </div>
+
+          <span class="case-tag">
+            BEAUTY • CONTENT • SOCIAL
+          </span>
+
+        </div>
+
+
+        <div class="case-grid">
+
+          <div class="case-copy reveal">
+
+
+            <div class="case-block">
+
+              <h4>
+                THE CHALLENGE
+              </h4>
+
+              <p>
+
+                Build a stronger and more
+                consistent visual presence
+                for the beauty brand.
+
+              </p>
+
+            </div>
+
+
+            <div class="case-block">
+
+              <h4>
+                OUR APPROACH
+              </h4>
+
+              <p>
+
+                Photography, reels,
+                promotional creatives and
+                social-first content.
+
+              </p>
+
+            </div>
+
+
+            <div class="case-block">
+
+              <h4>
+                WHAT WE DID
+              </h4>
+
+              <p>
+
+                Creative direction,
+                production, editing and
+                social media content.
+
+              </p>
+
+            </div>
+
+
+          </div>
+
+
+          <div class="case-gallery reveal">
+
+            <div class="case-image large">
+
+              <img
+                src="ishana-01.jpg"
+                alt="Ishana Makeovers"
+              >
+
+            </div>
+
+            <div class="case-image">
+
+              <img
+                src="ishana-02.jpg"
+                alt="Ishana Makeovers"
+              >
+
+            </div>
+
+            <div class="case-image">
+
+              <img
+                src="ishana-03.jpg"
+                alt="Ishana Makeovers"
+              >
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- CORE TEAM -->
+    <section id="team" class="team-section">
+
+      <div class="container">
+
+
+        <div class="reveal">
+
+          <div class="eyebrow">
+            05 / THE CORE TEAM
+          </div>
+
+          <h2 class="section-title">
+
+            THE PEOPLE
+            <span class="purple">
+              BEHIND THE BLOOM.
+            </span>
+
+          </h2>
+
+          <p class="section-description">
+
+            Four minds. One creative vision.
+            Different strengths coming together
+            to build brands that deserve to be noticed.
+
+          </p>
+
+        </div>
+
+
+        <div class="team-grid">
+
+
+          <!-- SAMPURNA -->
+
+          <article class="team-card reveal">
+
+            <div class="team-photo">
+
+              <img
+                src="sampurna.jpg"
+                alt="Sampurna"
+              >
+
+              <span class="team-number">
+                01
+              </span>
+
+            </div>
+
+
+            <div class="team-info">
+
+              <h3>
+                SAMPURNA
+              </h3>
+
+              <p class="team-role">
+                Creative Director
+              </p>
+
+              <p class="team-speciality">
+
+                Creative Strategy •
+                Creative Direction •
+                Brand Vision
+
+              </p>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- ASHUTOSH -->
+
+          <article class="team-card reveal">
+
+            <div class="team-photo">
+
+              <img
+                src="ashutosh.jpg"
+                alt="Ashutosh"
+              >
+
+              <span class="team-number">
+                02
+              </span>
+
+            </div>
+
+
+            <div class="team-info">
+
+              <h3>
+                ASHUTOSH
+              </h3>
+
+              <p class="team-role">
+                Content & Production
+              </p>
+
+              <p class="team-speciality">
+
+                Videography •
+                Photography •
+                Production
+
+              </p>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- BIBHU -->
+
+          <article class="team-card reveal">
+
+            <div class="team-photo">
+
+              <img
+                src="bibhu.jpg"
+                alt="Bibhu Bag"
+              >
+
+              <span class="team-number">
+                03
+              </span>
+
+            </div>
+
+
+            <div class="team-info">
+
+              <h3>
+                BIBHU BAG
+              </h3>
+
+              <p class="team-role">
+                Social & Marketing
+              </p>
+
+              <p class="team-speciality">
+
+                Social Media •
+                Content Strategy •
+                Campaigns
+
+              </p>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- ANNIK -->
+
+          <article class="team-card reveal">
+
+            <div class="team-photo">
+
+              <img
+                src="annik.jpg"
+                alt="Annik"
+              >
+
+              <span class="team-number">
+                04
+              </span>
+
+            </div>
+
+
+            <div class="team-info">
+
+              <h3>
+                ANNIK
+              </h3>
+
+              <p class="team-role">
+                Design & Creative
+              </p>
+
+              <p class="team-speciality">
+
+                Visual Design •
+                Campaign Creatives •
+                Brand Visuals
+
+              </p>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- APPROACH -->
+    <section id="approach">
+
+      <div class="container">
+
+        <div class="reveal">
+
+          <div class="eyebrow">
+            06 / OUR APPROACH
+          </div>
+
+          <h2 class="section-title">
+
+            FROM IDEA
+            <span class="purple">
+              TO IMPACT.
+            </span>
+
+          </h2>
+
+        </div>
+
+
+        <div class="approach-list">
+
+
+          <div class="approach-item reveal">
+
+            <span>01</span>
+
+            <h3>
+              THINK
+            </h3>
+
+            <p>
+              Understand the brand,
+              audience and objective.
+            </p>
+
+          </div>
+
+
+          <div class="approach-item reveal">
+
+            <span>02</span>
+
+            <h3>
+              CREATE
+            </h3>
+
+            <p>
+              Turn the strategy into
+              powerful visual content.
+            </p>
+
+          </div>
+
+
+          <div class="approach-item reveal">
+
+            <span>03</span>
+
+            <h3>
+              CONNECT
+            </h3>
+
+            <p>
+              Create content people
+              can relate to and remember.
+            </p>
+
+          </div>
+
+
+          <div class="approach-item reveal">
+
+            <span>04</span>
+
+            <h3>
+              GROW
+            </h3>
+
+            <p>
+              Learn from performance
+              and continuously improve.
+            </p>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- CTA -->
+    <section id="contact" class="cta">
+
+      <div class="container reveal">
+
+        <div class="eyebrow">
+          LET'S CREATE SOMETHING
+        </div>
+
+        <h2>
+
+          READY TO
+
+          <span>
+            BLOOM?
+          </span>
+
+        </h2>
+
         <p>
-            Social media management for brands that bloom.
+
+          Have a brand, campaign or idea
+          that deserves attention?
+          Let's turn it into something
+          people remember.
+
         </p>
 
 
-        <div class="footer-links">
+        <div class="buttons">
 
-            <a href="#">
-                Instagram
-            </a>
+          <a
+            href="https://wa.me/YOURNUMBER"
+            target="_blank"
+            class="btn btn-primary"
+          >
+            Start a Project →
+          </a>
 
-            <a href="#">
-                LinkedIn
-            </a>
-
-            <a href="mailto:hello@thebloomhouse.com">
-                Email
-            </a>
+          <a
+            href="https://instagram.com/YOURUSERNAME"
+            target="_blank"
+            class="btn btn-secondary"
+          >
+            Instagram
+          </a>
 
         </div>
 
+      </div>
 
-        <small>
-            © 2026 The Bloom House. All rights reserved.
-        </small>
-
-    </footer>
+    </section>
 
 
-    <script src="script.js"></script>
+  </main>
+
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container footer-inner">
+
+      <span>
+        © <span id="year"></span>
+        The Bloom House
+      </span>
+
+      <div>
+
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#team">Team</a>
+        <a href="#contact">Contact</a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <script src="script.js"></script>
 
 </body>
-
 </html>
