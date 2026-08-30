@@ -2416,5 +2416,36 @@ footer small {
             35px 0;
 
     }
+/* =========================================================
+   CORE TEAM — STAGGERED REVEAL
+   ========================================================= */
+
+const teamCards = document.querySelectorAll(".team-card");
+
+const teamObserver = new IntersectionObserver(
+  (entries) => {
+
+    entries.forEach((entry, index) => {
+
+      if (entry.isIntersecting) {
+
+        setTimeout(() => {
+          entry.target.classList.add("team-visible");
+        }, index * 120);
+
+        teamObserver.unobserve(entry.target);
+      }
+
+    });
+
+  },
+  {
+    threshold: 0.15
+  }
+);
+
+teamCards.forEach((card) => {
+  teamObserver.observe(card);
+});
 
 }
