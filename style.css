@@ -2743,4 +2743,13 @@ footer small {
   }
 
 }
+   .team-card {
+  opacity: 0;
+  transform: translateY(35px);
+}
+
+.team-card.team-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 }
