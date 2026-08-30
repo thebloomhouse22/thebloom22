@@ -2,113 +2,659 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>The Bloom House | Social Media Management</title>
+  <meta charset="UTF-8">
 
-    <meta
-        name="description"
-        content="The Bloom House — luxury social media management for brands ready to bloom online."
-    >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>The Bloom House</title>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
-        rel="stylesheet"
-    >
+  <meta
+    name="description"
+    content="The Bloom House — Creative • Social • Production"
+  >
 
-    <link rel="stylesheet" href="style.css">
-</head>
+  <style>
 
-<body>
+    /* =====================================================
+       THE BLOOM HOUSE
+       GLOBAL
+       ===================================================== */
 
-    <!-- ==============================
-         BACKGROUND
-    ============================== -->
+    :root {
 
-    <div class="background">
-        <div class="orb orb-one"></div>
-        <div class="orb orb-two"></div>
-        <div class="orb orb-three"></div>
-    </div>
+      --bg: #09040f;
+      --bg2: #11071b;
 
+      --purple: #7c3aed;
+      --violet: #a855f7;
+      --lavender: #d8b4fe;
 
-    <!-- ==============================
-         MANDA﻿LA
-    ============================== -->
+      --white: #ffffff;
+      --muted: #aaa1b5;
 
-    <div class="mandala-wrapper">
+      --line: rgba(216,180,254,0.15);
 
-        <div class="mandala">
+      --max-width: 1240px;
 
-            <div class="mandala-ring ring-one"></div>
-            <div class="mandala-ring ring-two"></div>
-            <div class="mandala-ring ring-three"></div>
-            <div class="mandala-ring ring-four"></div>
-
-            <div class="petals">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
-            <div class="mandala-center">
-                ✦
-            </div>
-
-        </div>
-
-    </div>
+    }
 
 
-    <!-- ==============================
-         NAVIGATION
-    ============================== -->
-
-    <header class="navbar">
-
-        <a href="#" class="logo">
-
-            <img
-                src="logo.jpg"
-                alt="The Bloom House Logo"
-                class="logo-image"
-            >
-
-        </a>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
 
-        <nav>
-
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#plans">Plans</a>
-            <a href="#contact">Contact</a>
-
-        </nav>
+    html {
+      scroll-behavior: smooth;
+    }
 
 
-        <a
-            href="https://wa.me/916371225580?text=Hi%20The%20Bloom%20House!%20I%27d%20like%20to%20know%20more%20about%20your%20services."
-            class="nav-button"
-            target="_blank"
-        >
-            Let's Bloom ↗
-        </a>
+    body {
 
-    </header>
+      background:
+        linear-gradient(
+          180deg,
+          #09040f,
+          #0d0615,
+          #09040f
+        );
+
+      color: var(--white);
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      overflow-x: hidden;
+
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+
+    .container {
+
+      width: min(
+        90%,
+        var(--max-width)
+      );
+
+      margin: auto;
+
+    }
+
+
+    section {
+
+      position: relative;
+
+      padding:
+        130px 0;
+
+    }
+
+
+    /* =====================================================
+       PURPLE BLOOM BACKGROUND
+       ===================================================== */
+
+    .bloom-background {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: -10;
+
+      pointer-events: none;
+
+      overflow: hidden;
+
+      background:
+
+        radial-gradient(
+          circle at 50% 15%,
+          rgba(124,58,237,0.18),
+          transparent 30%
+        ),
+
+        radial-gradient(
+          circle at 10% 60%,
+          rgba(168,85,247,0.08),
+          transparent 25%
+        ),
+
+        #09040f;
+
+    }
+
+
+    .bloom {
+
+      position: absolute;
+
+      width: 450px;
+      height: 450px;
+
+      left: 50%;
+      top: 20%;
+
+      transform:
+        translate(-50%,-50%);
+
+      border-radius: 50%;
+
+      background:
+
+        radial-gradient(
+          circle,
+          rgba(168,85,247,0.55),
+          rgba(124,58,237,0.16) 45%,
+          transparent 72%
+        );
+
+      filter: blur(35px);
+
+      animation:
+        bloomPulse 8s ease-in-out infinite;
+
+    }
+
+
+    .bloom::before {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 10%;
+
+      border-radius: 50%;
+
+      background:
+
+        radial-gradient(
+          ellipse,
+          rgba(216,180,254,0.18),
+          transparent 70%
+        );
+
+      transform:
+        rotate(45deg);
+
+    }
+
+
+    .orb {
+
+      position: absolute;
+
+      border-radius: 50%;
+
+      filter: blur(2px);
+
+      opacity: 0.25;
+
+    }
+
+
+    .orb.one {
+
+      width: 180px;
+      height: 180px;
+
+      left: 5%;
+      top: 35%;
+
+      background: var(--purple);
+
+      animation:
+        floatOne 12s ease-in-out infinite;
+
+    }
+
+
+    .orb.two {
+
+      width: 240px;
+      height: 240px;
+
+      right: 2%;
+      top: 55%;
+
+      background: var(--violet);
+
+      animation:
+        floatTwo 14s ease-in-out infinite;
+
+    }
+
+
+    @keyframes bloomPulse {
+
+      0%,100% {
+
+        transform:
+          translate(-50%,-50%)
+          scale(0.85);
+
+        opacity: 0.35;
+
+      }
+
+      50% {
+
+        transform:
+          translate(-50%,-50%)
+          scale(1.25);
+
+        opacity: 0.65;
+
+      }
+
+    }
+
+
+    @keyframes floatOne {
+
+      0%,100% {
+        transform: translate(0,0);
+      }
+
+      50% {
+        transform: translate(70px,-60px);
+      }
+
+    }
+
+
+    @keyframes floatTwo {
+
+      0%,100% {
+        transform: translate(0,0);
+      }
+
+      50% {
+        transform: translate(-80px,70px);
+      }
+
+    }
+
+
+    /* =====================================================
+       NAVBAR
+       ===================================================== */
+
+    .nav {
+
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+
+      z-index: 100;
+
+      padding: 20px 5%;
+
+      transition: 0.35s ease;
+
+    }
+
+
+    .nav.scrolled {
+
+      padding: 13px 5%;
+
+      background:
+        rgba(9,4,15,0.72);
+
+      backdrop-filter:
+        blur(18px);
+
+      border-bottom:
+        1px solid var(--line);
+
+    }
+
+
+    .nav-inner {
+
+      max-width:
+        var(--max-width);
+
+      margin: auto;
+
+      display: flex;
+
+      justify-content:
+        space-between;
+
+      align-items: center;
+
+    }
+
+
+    .logo {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      letter-spacing: 0.15em;
+
+    }
+
+
+    /*
+       Replace this with your real logo if needed.
+    */
+
+    .logo-mark {
+
+      width: 35px;
+      height: 35px;
+
+      border-radius: 50%;
+
+      background:
+
+        radial-gradient(
+          circle,
+          #ead7ff 0 8%,
+          transparent 9%
+        ),
+
+        conic-gradient(
+          #7c3aed,
+          #c084fc,
+          #6d28d9,
+          #a855f7,
+          #7c3aed
+        );
+
+      box-shadow:
+        0 0 30px
+        rgba(168,85,247,0.5);
+
+    }
+
+
+    .nav-links {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 30px;
+
+      font-size: 12px;
+
+      color: var(--muted);
+
+    }
+
+
+    .nav-links a {
+
+      transition: 0.25s ease;
+
+    }
+
+
+    .nav-links a:hover {
+
+      color: white;
+
+    }
+
+
+    .nav-cta {
+
+      border:
+        1px solid
+        rgba(216,180,254,0.3);
+
+      padding:
+        10px 17px;
+
+      border-radius: 100px;
+
+      color: white !important;
+
+    }
+
+
+    /* =====================================================
+       TYPOGRAPHY
+       ===================================================== */
+
+    .eyebrow {
+
+      margin-bottom: 22px;
+
+      color:
+        var(--lavender);
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.2em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .section-title {
+
+      font-size:
+        clamp(
+          45px,
+          7vw,
+          95px
+        );
+
+      line-height:
+        0.92;
+
+      letter-spacing:
+        -0.06em;
+
+      max-width:
+        950px;
+
+    }
+
+
+    .purple-text {
+
+      color:
+        var(--lavender);
+
+    }
+
+
+    .section-description {
+
+      margin-top: 28px;
+
+      max-width: 600px;
+
+      color:
+        var(--muted);
+
+      font-size: 15px;
+
+      line-height: 1.8;
+
+    }
+
+
+    /* =====================================================
+       HERO
+       ===================================================== */
+
+    .hero {
+
+      min-height:
+        100vh;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      padding-top:
+        130px;
+
+    }
+
+
+    .hero-title {
+
+      font-size:
+        clamp(
+          65px,
+          12vw,
+          165px
+        );
+
+      line-height:
+        0.82;
+
+      letter-spacing:
+        -0.075em;
+
+      font-weight:
+        900;
+
+    }
+
+
+    .hero-title span {
+
+      display:
+        block;
+
+    }
+
+
+    .outline {
+
+      color:
+        transparent;
+
+      -webkit-text-stroke:
+        1px rgba(255,255,255,0.65);
+
+    }
+
+
+    .hero-bottom {
+
+      margin-top:
+        55px;
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        flex-end;
+
+      gap: 40px;
+
+    }
+
+
+    .hero-description {
+
+      max-width:
+        470px;
+
+      color:
+        var(--muted);
+
+      line-height:
+        1.8;
+
+    }
+
+
+    .hero-buttons {
+
+      display:
+        flex;
+
+      gap: 12px;
+
+      flex-wrap:
+        wrap;
+
+    }
+
+
+    .btn {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      padding:
+        15px 22px;
+
+      border-radius:
+        100px;
+
+      border:
+        1px solid
+        var(--line);
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+
+      transition:
+        0.3s ease;
+
+    }    </header>
 
 
     <!-- ==============================
