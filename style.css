@@ -2416,5 +2416,331 @@ footer small {
             35px 0;
 
     }
+/* =========================================================
+   CORE TEAM
+   ========================================================= */
 
+.team-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle purple atmosphere behind team */
+
+.team-section::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(124, 58, 237, 0.12),
+    transparent 68%
+  );
+
+  pointer-events: none;
+}
+
+
+/* Team Grid */
+
+.team-grid {
+  margin-top: 70px;
+
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 18px;
+
+  position: relative;
+  z-index: 2;
+}
+
+
+/* Team Card */
+
+.team-card {
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.035),
+      rgba(168,85,247,0.025)
+    );
+
+  border: 1px solid var(--line);
+
+  transition:
+    transform 0.45s ease,
+    border-color 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+
+.team-card:hover {
+
+  transform: translateY(-10px);
+
+  border-color:
+    rgba(216,180,254,0.42);
+
+  box-shadow:
+    0 30px 90px rgba(124,58,237,0.18);
+
+}
+
+
+/* Photo */
+
+.team-photo {
+
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 4 / 5;
+
+  overflow: hidden;
+
+  background: #160b21;
+}
+
+
+.team-photo img {
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  filter: saturate(0.92);
+
+  transition:
+    transform 0.8s cubic-bezier(.2,.8,.2,1),
+    filter 0.5s ease;
+}
+
+
+.team-card:hover .team-photo img {
+
+  transform: scale(1.06);
+
+  filter: saturate(1);
+}
+
+
+/* Dark gradient over image */
+
+.team-photo-overlay {
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 45%,
+      rgba(9,4,15,0.08) 60%,
+      rgba(9,4,15,0.7) 100%
+    );
+
+  pointer-events: none;
+}
+
+
+/* Purple glow */
+
+.team-photo::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 160px;
+  height: 160px;
+
+  right: -80px;
+  bottom: -80px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(168,85,247,0.5),
+      transparent 70%
+    );
+
+  opacity: 0;
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+
+  pointer-events: none;
+}
+
+
+.team-card:hover .team-photo::after {
+
+  opacity: 1;
+
+  transform: scale(1.35);
+
+}
+
+
+/* Number */
+
+.team-index {
+
+  position: absolute;
+
+  top: 18px;
+  left: 18px;
+
+  z-index: 3;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    rgba(9,4,15,0.55);
+
+  border:
+    1px solid rgba(216,180,254,0.28);
+
+  backdrop-filter: blur(10px);
+
+  color: var(--lavender);
+
+  font-size: 10px;
+
+  letter-spacing: 0.1em;
+}
+
+
+/* Information */
+
+.team-info {
+
+  padding: 25px 22px 28px;
+}
+
+
+.team-info h3 {
+
+  font-size: 22px;
+
+  letter-spacing: -0.035em;
+
+  line-height: 1;
+
+  color: var(--white);
+}
+
+
+.team-role {
+
+  margin-top: 9px;
+
+  color: var(--lavender);
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.02em;
+}
+
+
+.team-speciality {
+
+  margin-top: 16px;
+
+  color: var(--muted);
+
+  font-size: 11px;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   TEAM RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+  .team-grid {
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .team-grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 22px;
+
+    margin-top: 45px;
+
+  }
+
+
+  .team-card {
+
+    border-radius: 22px;
+
+  }
+
+
+  .team-photo {
+
+    aspect-ratio: 4 / 5;
+
+  }
+
+
+  .team-info {
+
+    padding: 22px 20px 25px;
+
+  }
+
+
+  .team-info h3 {
+
+    font-size: 25px;
+
+  }
+
+}
 }
